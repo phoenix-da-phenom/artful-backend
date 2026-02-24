@@ -26,7 +26,7 @@ export async function magicLinkRegistration(req: Request, res: Response) {
   });
 
 
-  let from="Artful Studio <no-reply@artfulstudio.com>"
+  let from="onboarding@resend.dev"
   let subject="Welcome! Complete Registration"
 
 
