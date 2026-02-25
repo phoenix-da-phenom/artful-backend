@@ -26,7 +26,7 @@ export async function magicLinkRegistration(req: Request, res: Response) {
   });
 
 
-  let from="onboarding@resend.dev"
+  let from="onboarding@resend.dev"  //"onboarding@resend.dev"
   let subject="Welcome! Complete Registration"
 
 

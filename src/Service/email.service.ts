@@ -9,6 +9,7 @@ export async function sendMail(
   subject: string,
   html: string
 ) {
+  console.log(`EMail will be sending to : ${to}`)
   try {
     const info = await resend.emails.send({
       from,
