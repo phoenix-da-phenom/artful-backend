@@ -53,3 +53,35 @@ export async function loginUser(req:Request, res: Response){
   })
 
 } 
+
+export async function verifyRegistration(req: Request, res:Response){
+  const {token}= req.query;
+  if (!token){
+    return res.status(400).json({
+      message: "Token missing"
+    });
+   
+
+  }
+   const magicLink = await MagicLinTokenModel.findOne({token});
+   if (!magicLink){
+    return res.status(400).json({
+      message: "Invalid token"
+    })
+   }
+   if (magicLink.expiresAt < new Date()){
+    return res.status(400).json({message:"Token has expired"})
+   }
+
+   //token is valid here, log them in (e.g set session or JWT)
+   //Example: req.session.user =magicLink.email
+
+   //optionally, remove the token now that it's used
+
+   await MagicLinTokenModel.deleteOne({
+    token
+   })
+   res.status(200).json({message:"Authenticated successfully"})
+
+
+}
