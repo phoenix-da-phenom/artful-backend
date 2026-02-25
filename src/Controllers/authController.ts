@@ -5,6 +5,7 @@ import crypto from "crypto";
 import nodemailer from "nodemailer"
 import { sendMail } from "../Service/email.service";
 import { welcomeEmailTemplate } from "../Templates/WelcomeEmail";
+import { generateToken } from "../Utils/jwt";
 
 export function registerUser(req: Request, res: Response) {
   console.log(req.body);
@@ -38,3 +39,17 @@ export async function magicLinkRegistration(req: Request, res: Response) {
     message: "Magic link sent!"
   })
 }
+
+export async function loginUser(req:Request, res: Response){
+  const {email, password}= req.body;
+  //validate if user exist in database
+
+  //Generate JWT token
+  const token = generateToken("user_ID_HERE")
+  //return responses
+  res.status(200).json({
+    success: true,
+    token,
+  })
+
+} 
