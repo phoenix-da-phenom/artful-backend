@@ -19,20 +19,22 @@ export async function magicLinkRegistration(req: Request, res: Response) {
 
   //set expiration to  1 hour
   const expiresAt = new Date(Date.now() + 3600 * 1000);
-  //Store generated token in MongoDb
-  await MagicLinTokenModel.create({
-    email,
-    token,
-    expiresAt,
-  });
-
+  
 
   let from="onboarding@resend.dev"  //"onboarding@resend.dev"
   let subject="Welcome! Complete Registration"
 
 
   //send email
- await sendMail(from,email,subject,welcomeEmailTemplate(email))
+ await sendMail(from,email,subject,welcomeEmailTemplate(email,token))
+
+ //Store generated token in MongoDb
+  await MagicLinTokenModel.create({
+    email,
+    token,
+    expiresAt,
+  });
+
 
 
   res.status(200).json({
