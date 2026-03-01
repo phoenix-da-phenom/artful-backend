@@ -38,6 +38,7 @@ export async function magicLinkRegistration(req: Request, res: Response) {
 
 
   res.status(200).json({
+    token,
     message: "Magic link sent!"
   })
 }
